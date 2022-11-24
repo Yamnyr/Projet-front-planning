@@ -1,4 +1,3 @@
-import CalendarGrid from './components/CalendarGrid.jsx'
 import './App.css'
 import CalendarTable from "./components/CalendarTable";
 
