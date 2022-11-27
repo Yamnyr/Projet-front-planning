@@ -9,11 +9,11 @@ function EventManager({eventlist}) {
 
     if (eventlist.length > 3){
         displayEvents = displayEvents.slice(0,3);
-        displayEvents.push(<button style={{height: '25%', width: '100%', textAlign: 'center'}}> +{eventlist.length - 3}</button>)
+        displayEvents.push(<button style={{height: '25%', width: '100%', textAlign: 'center', backgroundColor:'#000000', color:'#FFFFFF'}}> +{eventlist.length - 3}</button>)
     }
 
     return (
-        <div style={{width: "100%", display: "flex", flexDirection: "column", height: "200px"}}>
+        <div style={{width: "100%", display: "flex", flexDirection: "column", height: "100%"}}>
             {displayEvents}
         </div>
     );
@@ -40,7 +40,7 @@ EventManager.defaultProps = {
             libEvent : "Event",
             heureDeb : null,
             heureFin: null,
-            desc_event : "Description",
+            desc_event : "Descriptionvyiffiiiiiiiiiiivyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         },
         {
             libEvent : "Event",
@@ -58,7 +58,7 @@ EventManager.defaultProps = {
             libEvent : "Event",
             heureDeb : null,
             heureFin: null,
-            desc_event : "Description",
+            desc_event : "Descriptionvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
         }],
 };
 
