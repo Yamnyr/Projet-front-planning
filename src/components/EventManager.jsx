@@ -9,7 +9,7 @@ function EventManager({eventlist}) {
 
     if (eventlist.length > 3){
         displayEvents = displayEvents.slice(0,3);
-        displayEvents.push(<button style={{height: '25%', width: '100%', textAlign: 'center', backgroundColor:'#000000', color:'#FFFFFF'}}> +{eventlist.length - 3}</button>)
+        displayEvents.push(<button style={{height: '25%', width: '100%', backgroundColor:'#000000', color:'#FFFFFF'}}> <span style={{margin:'auto'}}>+{eventlist.length - 3}</span></button>)
     }
 
     return (

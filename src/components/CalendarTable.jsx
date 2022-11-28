@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import EventManager from "./EventManager";
 
 function CalendarGrid() {
+    console.log(new Date())
     return (
         <TableContainer sx={{ width: "100%", height: "100%"}}>
             <Table sx={{ width: "100%",height: "100%", tableLayout:"fixed", lineHeight:"20px" }} size="small" aria-label="simple table">
@@ -22,9 +23,8 @@ function CalendarGrid() {
                         <TableCell sx={{textAlign:"center"}}>Dimanche</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                <TableBody sx={{height: "95%"}}>
                     <TableRow>
-                        {/* Insérer map de table cell*/}
                         <TableCell><EventManager /></TableCell>
                         <TableCell><EventManager /></TableCell>
                         <TableCell>  </TableCell>
@@ -34,14 +34,49 @@ function CalendarGrid() {
                         <TableCell></TableCell>
                     </TableRow>
                     <TableRow>
-                        {/* Insérer map de table cell*/}
                         <TableCell></TableCell>
                         <TableCell><EventManager /></TableCell>
                         <TableCell></TableCell>
                         <TableCell></TableCell>
                         <TableCell><EventManager /></TableCell>
                         <TableCell></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
                         <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
+                        <TableCell><EventManager /></TableCell>
+                        <TableCell><EventManager /></TableCell>
                     </TableRow>
                 </TableBody>
             </Table>

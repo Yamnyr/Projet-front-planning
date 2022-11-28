@@ -5,7 +5,7 @@ import EventManager from "./components/EventManager";
 function App() {
 
   return (
-      <div>
+      <div style={{height: "100%"}}>
         <CalendarTable/>
       </div>
   )
