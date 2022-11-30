@@ -2,24 +2,29 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Event from "./Event";
 
-function EventManager({eventlist}) {
+function EventManager({eventlist, day, month}) {
 
-    const events = eventlist.map(event => <Event heihgt={eventlist.length > 3 ? 25 : 100/eventlist.length} event={event} />)
+    const events = eventlist.map(event => <Event heihgt={eventlist.length > 3 ? 25 : 100/eventlist.length - 4} event={event} />)
     let displayEvents = events;
 
     if (eventlist.length > 3){
         displayEvents = displayEvents.slice(0,3);
-        displayEvents.push(<button style={{height: '25%', width: '100%', backgroundColor:'#000000', color:'#FFFFFF'}}> <span style={{margin:'auto'}}>+{eventlist.length - 3}</span></button>)
+        displayEvents.push(<button style={{height: '10%', display: "inline-flex", alignItems: "center", justifyContent:"center", width: '100%', backgroundColor:'#000000', color:'#FFFFFF'}}>+{eventlist.length - 3}</button>)
     }
+
+    console.log(displayEvents)
 
     return (
         <div style={{width: "100%", display: "flex", flexDirection: "column", height: "100%"}}>
+            <span style={{height: '4%', fontWeight:'bold', fontSize: '0.6em', display: "inline-flex", alignItems: "end", justifyContent:"center"}}>{day} {month}.</span>
             {displayEvents}
         </div>
     );
 }
 
 EventManager.propTypes = {
+    day : PropTypes.number,
+    month: PropTypes.string,
     eventlist : PropTypes.arrayOf({
         event : PropTypes.shape({
             libEvent : PropTypes.string,
@@ -30,6 +35,8 @@ EventManager.propTypes = {
 };
 
 EventManager.defaultProps = {
+    day : 3,
+    month: "oct",
     eventlist : [{
     libEvent : "Event",
         heureDeb : null,
