@@ -1,20 +1,25 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import TableRow from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableBody';
+import TableRow from '@mui/material/TableRow';
+import TableCell from '@mui/material/TableCell';
 import EventManager from "./EventManager";
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+const monthNames = ["Jan.", "Fev.", "Mar.", "Avr.", "Mai", "Jui.",
+    "Jui.", "Aou.", "Sep.", "Oct.", "Nov.", "Dec."
 ];
 
 
-function RowMaker({start, month, events}) {
-    let Row = events.map(eventDay =>
-        <TableCell>
-            <EventManager month={monthNames[month]} />
-        </TableCell>
-    )
+function RowMaker({start, month, events, day}) {
+    let Row = [];
+    // for (let i=0; i<start;i++){
+    //     Row.push(<TableCell></TableCell>)
+    // }
+    // for (let i=0; i<events.length;i++){
+    for (let i=0; i<7;i++){
+        Row.push(<TableCell>
+            <EventManager month={monthNames[month]} day={day+i}/>
+        </TableCell>);
+    }
     return (
         <TableRow>
             {Row}

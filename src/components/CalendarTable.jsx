@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import EventManager from "./EventManager";
+import RowManager from "./RowManager";
 
 function CalendarGrid() {
     console.log(new Date())
@@ -23,62 +24,63 @@ function CalendarGrid() {
                         <TableCell sx={{textAlign:"center"}}>Dimanche</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody sx={{height: "95%"}}>
-                    <TableRow>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell>  </TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                        <TableCell><EventManager /></TableCell>
-                    </TableRow>
-                </TableBody>
+                <RowManager></RowManager>
+                {/*<TableBody sx={{height: "95%"}}>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell>  </TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*    <TableRow>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*        <TableCell><EventManager /></TableCell>*/}
+                {/*    </TableRow>*/}
+                {/*</TableBody>*/}
             </Table>
         </TableContainer>
     );
