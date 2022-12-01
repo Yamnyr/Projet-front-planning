@@ -3,25 +3,14 @@ import PropTypes from 'prop-types';
 import TableBody from '@mui/material/TableBody';
 import RowMaker from "./RowMaker";
 
-const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
-
-function RowManager({month, events}) {
-    let Rows = "";
-    const Today = new Date();
-    if (monthNames[Today.getMonth()] === month){
-        let start = (Today.getDay() + Today.getDate())%7;
-        let day = 1;
-        day = day + 7 - start;
-        Rows += `<RowMaker start={start} day={day} />`
-        for(let i = 0; i < Math.floor((Today.getDay() + Today.getDate()) / 7) - 1; i++ ){
-            Rows += `<RowMaker day={day} />`
-            day += 7;
-        }
-    }
-    else {
-
+function RowManager({month, year, events}) {
+    const DayInMonth = new Date(month,year,0).getDate();
+    const FirstDayOfTheMonth = new Date(year, month, 1).getDay();
+    const FirstWeekOfMonth = FirstDayOfTheMonth%7;
+    let Rows = <RowMaker start={FirstDayOfTheMonth} month={month}/> ;
+    let CountDay = FirstDayOfTheMonth + FirstWeekOfMonth ;
+    for (CountDay; CountDay < DayInMonth; CountDay+7){
+        Rows += <RowMaker month={month}/>
     }
     return (
         <TableBody sx={{height: "95%"}}>
@@ -31,11 +20,13 @@ function RowManager({month, events}) {
 }
 
 RowManager.propTypes = {
-    month: PropTypes.string,
+    month: PropTypes.number,
+    year : PropTypes.number,
 };
 
 RowManager.defaultProps = {
-    month: monthNames[new Date().getMonth()],
+    month: new Date().getMonth(),
+    year : new Date().getFullYear(),
 };
 
 export default RowManager;
