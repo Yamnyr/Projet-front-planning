@@ -1,37 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import Event from "./Event";
+import useCalendar from "../hooks/UseCalendar.jsx";
 
 function EventManager({ eventlist, day, month }) {
+  const { displayEvent } = useCalendar();
   const [displayEvents, setDisplayEvents] = useState("");
 
   useEffect(() => {
-    let events = eventlist.map((event) => (
-      <Event
-        height={eventlist.length > 3 ? 25 : 100 / eventlist.length - 4}
-        event={event}
-      />
-    ));
-
-    if (eventlist.length > 3) {
-      events = events.slice(0, 3);
-      events.push(
-        <button
-          style={{
-            height: "10%",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            backgroundColor: "#000000",
-            color: "#FFFFFF",
-          }}
-        >
-          +{eventlist.length - 3}
-        </button>
-      );
-    }
-    setDisplayEvents(events);
+    setDisplayEvents(displayEvent(eventlist));
   }, []);
 
   return (
