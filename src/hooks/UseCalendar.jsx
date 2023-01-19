@@ -1,26 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TableCell from "@mui/material/TableCell";
-import EventManager from "../components/EventManager";
-import Event from "../components/Event";
-import RowMaker from "../components/RowMaker.jsx";
+import EventManager from "../components/Calendar/EventManager";
+import Event from "../components/Calendar/Event";
+import RowMaker from "../components/Calendar/RowMaker";
 
 const monthNames = [
-  "Jan.",
-  "Fev.",
-  "Mar.",
-  "Avr.",
+  "Janvier",
+  "Février",
+  "Mardi",
+  "Avril",
   "Mai",
-  "Jui.",
-  "Jui.",
-  "Aou.",
-  "Sep.",
-  "Oct.",
-  "Nov.",
-  "Dec.",
+  "Juin",
+  "Juillet",
+  "Août",
+  "Septembre",
+  "Octobre",
+  "Novembre",
+  "Décembre",
 ];
 
 function useCalendar() {
-  const displayRow = (month, year) => {
+  const [month, setMonth] = useState(new Date().getMonth() + 1);
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const updateDate = (date) => {
+    setMonth(date.$d.getMonth() + 1);
+    setYear(date.$d.getFullYear());
+  };
+
+  const displayRow = () => {
+    console.log("ffffff");
     const DayInMonth = new Date(year, month, 0).getDate();
     const FirstDayOfTheMonth = new Date(year, month - 1, 1).getDay();
     const DayInFirstWeek =
@@ -44,45 +53,34 @@ function useCalendar() {
     let events = eventlist.map((event) => (
       <Event
         height={eventlist.length > 3 ? 25 : 100 / eventlist.length - 4}
-        event={event}
+        eventDescription={event}
       />
     ));
 
     if (eventlist.length > 3) {
       events = events.slice(0, 3);
-      events.push(
-        <button
-          style={{
-            height: "10%",
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            backgroundColor: "#000000",
-            color: "#FFFFFF",
-          }}
-        >
-          +{eventlist.length - 3}
-        </button>
-      );
     }
     return events;
   };
-  const displayDate = (day, month, start, end) => {
+  const displayDate = (day, monthCell, start, end) => {
     const tempsRow = [];
     if (start !== -1) {
       for (let i = 0; i < 7; i++) {
         tempsRow.push(
           i < start ? (
-            <TableCell>
+            <TableCell sx={{ padding: 0, height: "auto" }}>
               <EventManager
-                month={month === 1 ? monthNames[11] : monthNames[month - 2]}
+                month={
+                  monthCell === 1
+                    ? `${monthNames[11].slice(0, 3)}.`
+                    : `${monthNames[monthCell - 2].slice(0, 3)}.`
+                }
                 day={
                   new Date(
-                    month === 1
+                    monthCell === 1
                       ? new Date().getFullYear() - 1
                       : new Date().getFullYear(),
-                    month === 1 ? 12 : month - 1,
+                    monthCell === 1 ? 12 : monthCell - 1,
                     0
                   ).getDate() -
                   start +
@@ -92,8 +90,11 @@ function useCalendar() {
               />
             </TableCell>
           ) : (
-            <TableCell>
-              <EventManager month={monthNames[month - 1]} day={start + 1 - i} />
+            <TableCell sx={{ padding: 0, height: "auto" }}>
+              <EventManager
+                month={`${monthNames[monthCell - 1].slice(0, 3)}.`}
+                day={start + 1 - i}
+              />
             </TableCell>
           )
         );
@@ -102,16 +103,20 @@ function useCalendar() {
       for (let i = 0; i < 7; i++) {
         tempsRow.push(
           day + i > end ? (
-            <TableCell>
+            <TableCell sx={{ padding: 0, height: "auto" }}>
               <EventManager
-                month={month === 12 ? monthNames[0] : monthNames[month]}
+                month={
+                  monthCell === 12
+                    ? `${monthNames[0].slice(0, 3)}.`
+                    : `${monthNames[monthCell].slice(0, 3)}.`
+                }
                 day={
                   -(
                     new Date(
-                      month === 12
+                      monthCell === 12
                         ? new Date().getFullYear() + 1
                         : new Date().getFullYear(),
-                      month === 12 ? 1 : month,
+                      monthCell === 12 ? 1 : monthCell,
                       0
                     ).getDate() -
                     i -
@@ -122,8 +127,11 @@ function useCalendar() {
               />
             </TableCell>
           ) : (
-            <TableCell>
-              <EventManager month={monthNames[month - 1]} day={day + i} />
+            <TableCell sx={{ padding: 0, height: "auto" }}>
+              <EventManager
+                month={`${monthNames[monthCell - 1].slice(0, 3)}.`}
+                day={day + i}
+              />
             </TableCell>
           )
         );
@@ -131,8 +139,11 @@ function useCalendar() {
     } else {
       for (let i = 0; i < 7; i++) {
         tempsRow.push(
-          <TableCell>
-            <EventManager month={monthNames[month - 1]} day={day + i} />
+          <TableCell sx={{ padding: 0, height: "auto" }}>
+            <EventManager
+              month={`${monthNames[monthCell - 1].slice(0, 3)}.`}
+              day={day + i}
+            />
           </TableCell>
         );
       }
@@ -140,7 +151,7 @@ function useCalendar() {
     return tempsRow;
   };
 
-  return { displayRow, displayEvent, displayDate };
+  return { month, year, updateDate, displayRow, displayEvent, displayDate };
 }
 
 export default useCalendar;

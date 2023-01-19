@@ -1,10 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import useCalendar from "../hooks/UseCalendar.jsx";
+import useCalendar from "../../hooks/UseCalendar";
+import EventPopUp from "./Event/EventPopUp.jsx";
 
 function EventManager({ eventlist, day, month }) {
   const { displayEvent } = useCalendar();
   const [displayEvents, setDisplayEvents] = useState("");
+  const divRef = useRef(null);
+  const buttonPlusRef = useRef(null);
+  const [buttonPlus, setButtonPlus] = useState("");
+
+  useLayoutEffect(() => {
+    if (divRef.current) {
+      const parentHeight = divRef.current.parentNode.clientHeight;
+      divRef.current.style.maxHeight = `${parentHeight}px`;
+      if (eventlist.length > 3) {
+        setButtonPlus(
+          <button
+            ref={buttonPlusRef}
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              display: "flex",
+              flexGrow: 1,
+              backgroundColor: "#000000",
+              color: "#FFFFFF",
+              maxHeight: `${parentHeight * 0.1}px`,
+            }}
+          >
+            +{eventlist.length - 3}
+          </button>
+        );
+      }
+    }
+  }, []);
 
   useEffect(() => {
     setDisplayEvents(displayEvent(eventlist));
@@ -12,6 +42,7 @@ function EventManager({ eventlist, day, month }) {
 
   return (
     <div
+      ref={divRef}
       style={{
         width: "100%",
         display: "flex",
@@ -21,10 +52,9 @@ function EventManager({ eventlist, day, month }) {
     >
       <span
         style={{
-          height: "4%",
           fontWeight: "bold",
           fontSize: "0.6em",
-          display: "inline-flex",
+          display: "flex",
           alignItems: "end",
           justifyContent: "center",
         }}
@@ -32,6 +62,7 @@ function EventManager({ eventlist, day, month }) {
         {day} {month}
       </span>
       {displayEvents}
+      {buttonPlus}
     </div>
   );
 }
@@ -56,7 +87,8 @@ EventManager.defaultProps = {
       libEvent: "Event",
       heureDeb: null,
       heureFin: null,
-      desc_event: "Description",
+      desc_event:
+        "Descriptionvyiffiiiiiiiiiiivyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
     },
     {
       libEvent: "Event",
