@@ -6,3 +6,64 @@
 .MuiTableCell-body{
   height: 10%;
 }
+
+.navbar {
+  background-color: #42BDF0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-left, .navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-center {
+  flex: 1;
+  text-align: center;
+  color: white;
+  font-size: 40px;
+}
+
+.navbar-text {
+  color: white;
+  font-size: 30px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.group-title {
+  white-space: nowrap;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar {
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+  }
+  .navbar-left, .navbar-right {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .navbar-center {
+    width: 100%;
+    font-size: 20px;
+    margin: 10px 0;
+  }
+  .navbar-text {
+    font-size: 20px;
+  }
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
+}
