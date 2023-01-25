@@ -5,4 +5,57 @@
 
 .MuiTableCell-body{
   height: 10%;
+}h1 {
+   color: #42BDF0;
+   font-size: 20px !important;
+   text-align: center;
+ }
+
+form {
+  background: white;
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 30px;
+}
+
+input,select,textarea {
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+}
+input.checkbox {
+  width: 5%;
+}
+label.checkbox {
+  color :white;
+}
+label {
+  color: #42BDF0;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+div.scroll {
+  background-color: #3B3B3B;
+  height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+}
+.submitButton {
+  background-color: #42BDF0;
+  color: white;
+  font-size: 14px;
+  margin: 20px 0px;
+  cursor: pointer
+}
+.submitButton:hover {
+  background-color: #0A3054;
 }
