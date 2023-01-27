@@ -1,15 +1,14 @@
-import './App.css'
+import "./App.css";
 import CalendarTable from "./components/CalendarTable";
 import EventManager from "./components/EventManager";
-import Groupe from "./components/Groupe.jsx";
+import Groupe from "./components/Groupe";
 
 function App() {
-
   return (
-      <div style={{height: "100%"}}>
-        <Groupe/>
-      </div>
-  )
+    <div style={{ height: "100%" }}>
+      <Groupe />
+    </div>
+  );
 }
 
-export default App
+export default App;
