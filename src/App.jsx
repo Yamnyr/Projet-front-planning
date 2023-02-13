@@ -7,7 +7,7 @@ function App() {
 
   return (
       <div style={{height: "100%"}}>
-        <CalendarTable/>
+        <Authentication/>
       </div>
   )
 }
