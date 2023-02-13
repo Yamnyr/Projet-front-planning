@@ -81,7 +81,22 @@ function Groupe() {
           >
             <h2>{modalGroup.lib_groupe}</h2>
             <p>{modalGroup.desc_groupe}</p>
+            {modalGroup.utilisateurs && modalGroup.utilisateurs.length > 0 && (
+              <>
+                <h3>Nom et prénom des élèves :</h3>
+                <ul>
+                  {modalGroup.utilisateurs.map((user) => (
+                    <li key={user.id}>
+                      {user.prenom_utilisateur} {user.nom_utilisateur}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
             <button onClick={handleModalClose}>Fermer</button>
+            <button style={{ marginLeft: "20px" }} onClick="#">
+              Modifier
+            </button>
           </div>
         </div>
       )}
