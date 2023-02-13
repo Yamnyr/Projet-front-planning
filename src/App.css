@@ -1,6 +1,8 @@
 #root {
   width: 100vw;
   height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 .MuiTableCell-body{
@@ -91,4 +93,69 @@
   100% {
     transform: translateY(50%);
   }
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-column, .right-column {
+  width: 50%;
+  height: 100%;
+}
+
+.box-form {
+  margin-top: 150px;
+}
+
+.box-img {
+  margin-top: 80px;
+}
+
+.block-connect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-connect {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.form-connect {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.button-connect {
+  background-color: #42BDF0;
+  height: 45px;
+  width: 400px;
+  color: white;
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.input-connect {
+  height: 45px;
+  width: 400px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+  border: 2px solid #42BDF0;
+  box-shadow: 10px 5px 5px gray;
+  font-size: 17px;
+}
+
+.text-connect-label {
+  color: #1a1a1a;
+}
+
+.input-radio {
+  margin: 10px;
 }
