@@ -1,43 +1,22 @@
+import jwt_decode from "jwt-decode";
 import React, { useState } from "react";
-import axios from "axios";
+import { login } from "../services/api/authentification";
 
 function Authentication() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-
-  const api = axios.create({
-    baseURL: "http://127.0.0.1:8000",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  function login(username, password) {
-    api
-      .post("/api/login", {
-        username,
-        password,
-      })
-      .then((response) => {
-        // if login is successful
-        if (response.data.token) {
-          setToken(response.data.token);
-          localStorage.setItem("jwtToken", response.data.token);
-          api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
-          console.log("Connexion réussie");
-        }
-      })
-      .catch((error) => {
-        console.log("Connexion erreur");
-      });
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    login(username, password);
+    login({ username, password }).then((response) => {
+      const decodedToken = jwt_decode(response.token);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", response.data.id);
+      localStorage.setItem("username", decodedToken.username);
+      localStorage.setItem("roles", decodedToken.roles);
+      window.location.reload();
+    });
   }
-
   return (
     <div className="container">
       <div className="left-column">
