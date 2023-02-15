@@ -6,6 +6,7 @@ import {
   fetchGroupeByLib,
   fetchGroupeById,
   fetchDeleteUser,
+  fetchEditGroupe,
 } from "../services/api/groupeApi";
 import Groupe from "../components/newGroupe/Groupe";
 
@@ -17,7 +18,6 @@ export default function useEditGroupe(idgroupe, register, getValues, setValue) {
   const [listOptions, setListOptions] = useState();
   const [currentuser, setCurrentUser] = useState();
   const [reload, setReload] = useState(false);
-
   const DeleteUser = (Iduser) => {
     fetchDeleteUser(idgroupe, Iduser)
       .then((res) => {
@@ -39,12 +39,10 @@ export default function useEditGroupe(idgroupe, register, getValues, setValue) {
       });
     fetchGroupeById(idgroupe)
       .then((res) => {
-        console.log(res);
         setValue("libgroupe", res.lib_groupe);
         setValue("descriptiongroupe", res.desc_groupe);
         setValue("couleurgroupe", res.color);
         setValue("GroupeParent", res.groupe_parent.id);
-        console.log(getValues("libgroupe"));
         const user = res.utilisateurs.map((g) => (
           <div className="item-user">
             <div>
@@ -62,6 +60,10 @@ export default function useEditGroupe(idgroupe, register, getValues, setValue) {
             </div>
           </div>
         ));
+        setListUserChecked(
+          res.utilisateurs.map((u) => `api/utilisateurs/${u.id}`)
+        );
+        console.log(res.utilisateurs.map((u) => `api/utilisateurs/${u.id}`));
         setCurrentUser(user);
       })
       .catch((err) => {
@@ -76,7 +78,6 @@ export default function useEditGroupe(idgroupe, register, getValues, setValue) {
         groupe={g}
         setListUserChecked={(e) => {
           setListUserChecked([...ListUserChecked, `api/utilisateurs/${e}`]);
-          console.log(ListUserChecked);
         }}
         ListUserChecked={ListUserChecked}
       />
@@ -95,11 +96,15 @@ export default function useEditGroupe(idgroupe, register, getValues, setValue) {
   }, [ListUserChecked, DataListGroupe]);
 
   const submitGroupe = (data) => {
-    console.log(data, ListUserChecked);
-    fetchNewGroupe(data, ListUserChecked).then((res) => {
-      alert("Groupe crée avec succès");
-      window.location.href = "/";
-    });
+    console.log(idgroupe, data, ListUserChecked);
+    fetchEditGroupe(idgroupe, data, ListUserChecked)
+      .then(() => {
+        alert("Groupe crée avec succès");
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return {
     ListGroupe,

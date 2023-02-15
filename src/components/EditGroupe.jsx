@@ -15,7 +15,6 @@ export default function Newgroupe() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(errors);
 
   const {
     ListGroupe,
@@ -27,7 +26,6 @@ export default function Newgroupe() {
 
   register("libgroupe", "res.libelle_groupe", { required: true });
 
-  console.log(getValues("libgroupe"));
   return (
     <div className="container-main">
       <div className="newGroupe-container">
@@ -87,7 +85,7 @@ export default function Newgroupe() {
                   type="select"
                   {...register("GroupeParent")}
                 >
-                  <option value="">Selectionner un groupe</option>
+                  <option value={null}>Selectionner un groupe</option>
                   {listOptions}
                 </Control>
               </div>
