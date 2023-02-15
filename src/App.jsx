@@ -1,16 +1,17 @@
-import './App.css'
-import CalendarTable from "./components/CalendarTable";
-import EventManager from "./components/EventManager";
-import EventAdd from "./components/EventAdd";
+
+import React from "react";
+import "./App.css";
+import Provider from "./Context/Provider";
+import EventAdd from "./components/EventAdd.jsx";
 
 function App() {
-
   return (
-      <div style={{height: "100%"}}>
-        {/*<CalendarTable/>*/}
-          <EventAdd></EventAdd>
-      </div>
-  )
+    <div style={{ height: "100%" }}>
+      {/*<Provider />*/}
+        <EventAdd></EventAdd>
+    </div>
+
+  );
 }
 
-export default App
+export default App;

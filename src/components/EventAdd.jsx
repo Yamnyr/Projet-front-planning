@@ -4,17 +4,21 @@ import styled from "styled-components";
 import moment from "moment";
 import axios from "axios";
 import { fetchAllGroupes } from "../services/api/evenementApi";
+import "../App.css";
+import UserContext from "../Context/index";
 
 /*
 import saveData from "./test"; */
 
 export function Form() {
-    const [nom, setNom] = React.useState("");
-    const [date, setDate] = React.useState("");
-    const [description, setDescription] = React.useState("");
-    const [groupeConcerne, setGroupeConcerne] = React.useState([]);
+    const [nom, setNom] = useState("");
+    const [date, setDate] = useState("");
+    const [description, setDescription] = useState("");
+    const [groupeConcerne, setGroupeConcerne] = useState([]);
 
     const [groupesList, setGroupesList] = useState([]);
+    const [result, setResult] = useState('')
+    const { userData } = React.useContext(UserContext);
 
     const api = axios.create({
         baseURL: "http://127.0.0.1:8000",
@@ -39,6 +43,10 @@ export function Form() {
       
     `);
     addEvent({date}, {groupeConcerne}, {nom} , {description});
+        /*setNom('');
+        setDate('');
+        setDescription('');
+        setGroupeConcerne([]);*/
     };
     function addEvent({date}, {groupeConcerne}, {nom}, {description}) {
         api
@@ -46,33 +54,49 @@ export function Form() {
                 "date": date,
                 "concerne": groupeConcerne
                 ,
-                // "utilisateur": "api/utilisateurs/2",
+                "utilisateur": `api/utilisateurs/${userData.id}`,
                 "libEvenement": nom,
                 "descEvenement": description
             })
             .then((response) => {
                 console.log("success")
+                setResult("Evenement ajouté avec succes");
             })
             .catch((error) => {
                 console.log("error");
+                setResult('l\'Evénement n\'a pas été ajoute, vérifiez que les champs soient bien remplis');
             });
     }
 
+    function toggleValue(val) {
+        const index = groupeConcerne.indexOf(val);
+        if (index > -1) {
+            const newGroupeConcerne = [...groupeConcerne];
+            newGroupeConcerne.splice(index, 1);
+            setGroupeConcerne(newGroupeConcerne);
+        } else {
+            setGroupeConcerne([...groupeConcerne, val]);
+        }
+    }
     return (
         <form onSubmit={handleSubmit}>
             <h1>Nouvel Evenement</h1>
             <label>Nom</label>
             <input
                 type="text"
+                required={true}
                 id="nom"
                 name="nom"
+                value={nom}
                 onChange={(e) => setNom(e.target.value)}
             />
             <label>Date</label>
             <input
                 name="date"
+                required={true}
                 type="date"
                 id="date"
+                value={date}
                 min={moment().format("YYYY-MM-DD")}
                 onChange={(e) => setDate(e.target.value)}
             />
@@ -80,12 +104,10 @@ export function Form() {
             <textarea
                 name="description"
                 id="description"
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
             <label>Groupe concerné</label>
-            {/* <select name="groupes" multiple>
-                {group.map(group => <option key={group.id}>{`${group.lib_groupe}`}</option>)}
-            </select>{`${group.lib_groupe}`} */}
             <div className="scroll">
                 {groupesList.map((group) => (
                     <label className="checkbox">
@@ -96,7 +118,7 @@ export function Form() {
                             name="interest"
                             value={`${group.id}`}
                             onChange={(e) =>
-                                setGroupeConcerne([...groupeConcerne, 'api/groupes/'+e.target.value])
+                                toggleValue('api/groupes/'+e.target.value)
                             }
                         />
                         <span>{`${group.lib_groupe}`}</span>
@@ -104,6 +126,7 @@ export function Form() {
                 ))}
             </div>
             <input type="submit" className="submitButton" />
+            <label className={result}>{result}</label>
         </form>
     );
 }
