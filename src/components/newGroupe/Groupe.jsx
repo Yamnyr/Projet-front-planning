@@ -18,7 +18,6 @@ export default function Groupe({
           onChange={(e) => {
             if (e.target.checked) {
               setListUserChecked(u.id);
-              console.log(ListUserChecked);
             }
           }}
         />

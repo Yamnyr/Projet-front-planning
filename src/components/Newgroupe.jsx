@@ -1,97 +1,114 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import Form from "react-bootstrap/Form";
 
-import Groupe from "./newGroupe/Groupe";
 import useNewGroupe from "../hooks/useNewGroupe";
 
+const { Group, Label, Control } = { ...Form };
 export default function Newgroupe() {
-  // data groupe
-  const [libgroupe, setLibgroupe] = useState(); // libelle du groupe
-  const [descriptiongroupe, setDescriptiongroupe] = useState(); // description du groupe
-  const [datecreation] = useState(new Date()); // date creation
-  const [GroupeParent, setGroupeParent] = useState(); // id du groupe parent
-  const [couleurgroupe, setCouleurgroupe] = useState(); // couleur du groupe
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  console.log(errors);
 
-  const { ListGroupe, listOptions, submitGroupe } = useNewGroupe();
+  const { ListGroupe, listOptions, submitGroupe, setSearchGroupe } =
+    useNewGroupe();
 
   return (
     <div className="container-main">
       <div className="newGroupe-container">
-        <div className="info-groupe">
-          <div className="size">
-            <div>
-              <span>Libelle du groupe :</span>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setLibgroupe(e.target.value);
-                }}
-              />
+        <form onSubmit={handleSubmit(submitGroupe)}>
+          <div className="info-groupe">
+            <div className="size">
+              <div>
+                <Group>
+                  <Label>Libelle du groupe :</Label>
+                  <Control
+                    required
+                    type="text"
+                    placeholder="Nom du groupe"
+                    {...register("libgroupe")}
+                  />
+                </Group>
+              </div>
+              <div>
+                <Group>
+                  <Label>Description Groupe :</Label>
+                  <Control
+                    type="text"
+                    placeholder="Description du groupe"
+                    {...register("descriptiongroupe")}
+                  />
+                </Group>
+              </div>
             </div>
-            <div>
-              <span>Description Groupe :</span>
-              <textarea
-                name=""
-                id=""
-                cols="20"
-                rows="10"
-                onChange={(e) => {
-                  setDescriptiongroupe(e.target.value);
-                }}
-              />
+            <hr />
+            <div className="size">
+              <div>
+                <Group>
+                  <Label>Date creation :</Label>
+                  <Control
+                    type="text"
+                    placeholder="Date creation"
+                    disabled
+                    value={new Date().toUTCString()}
+                  />
+                </Group>
+              </div>
+              <div>
+                <Group>
+                  <Label>Couleur : </Label>
+                  <Control
+                    type="color"
+                    placeholder="Description du groupe"
+                    {...register("couleurgroupe")}
+                  />
+                </Group>
+              </div>
+              <div>
+                <span>Groupe parent :</span>
+                <Control
+                  required
+                  as="select"
+                  type="select"
+                  {...register("GroupeParent")}
+                >
+                  <option value="">Selectionner un groupe</option>
+                  {listOptions}
+                </Control>
+              </div>
             </div>
           </div>
-          <hr />
 
-          <div className="size">
-            <div>
-              <span>Date creation :</span>
-              <input type="text" disabled value={new Date().toUTCString()} />
-            </div>
-            <div>
-              <span>Date creation :</span>
-              <input
-                type="color"
-                onChange={(e) => {
-                  setCouleurgroupe(e.target.value);
-                }}
-              />
-            </div>
-            <div>
-              <span>Groupe Parents :</span>
-              <select
-                name=""
-                id=""
-                onChange={(e) => {
-                  setGroupeParent(e.target.value);
-                }}
-              >
-                <option value="">Selectionner un groupe</option>
-                {listOptions}
-              </select>
+          <div className="members-group">
+            <div className="current-members" />
+            <div className="right-side">
+              <div className="search">
+                <input
+                  type="text"
+                  onChange={(e) => {
+                    setSearchGroupe(e.target.value);
+                  }}
+                  placeholder="Recherche Groupe"
+                />
+              </div>
+              <div className="list-groupe"> {ListGroupe}</div>
             </div>
           </div>
-        </div>
-
-        <div className="members-group">
-          <div className="current-members" />
-          <div className="list-groupe"> {ListGroupe}</div>
-        </div>
-        <div className="btn-validation">
-          <button type="button">ANNULER</button>
-          <button
-            type="button"
-            onClick={() => {
-              submitGroupe(
-                libgroupe,
-                descriptiongroupe,
-                GroupeParent,
-                couleurgroupe
-              );
-            }}
-          >
-            VALIDER
-          </button>
-        </div>
+          <div className="btn-validation">
+            <button
+              type="button"
+              onClick={() => {
+                window.history.back();
+              }}
+            >
+              ANNULER
+            </button>
+            <button type="submit">VALIDER</button>
+          </div>
+        </form>
       </div>
     </div>
   );
