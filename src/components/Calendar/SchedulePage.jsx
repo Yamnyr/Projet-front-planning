@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ScheduleComponent from "./ScheduleComponent";
 import Groups from "./Groups/Groups";
 import AdminButtons from "./AdminButtons";
@@ -7,7 +7,7 @@ import useCalendar from "../../hooks/UseCalendar.jsx";
 function SchedulePage() {
   const { month, year, updateDate, displayRow } = useCalendar();
   return (
-    <div
+    <div1
       style={{
         width: "100%",
         height: "100%",
@@ -33,7 +33,7 @@ function SchedulePage() {
           updateDate={updateDate}
         />
       </div>
-    </div>
+    </div1>
   );
 }
 

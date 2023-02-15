@@ -1,10 +1,11 @@
+import React from "react";
 import "./App.css";
-import SchedulePage from "./components/Calendar/SchedulePage";
+import Provider from "./Context/Provider";
 
 function App() {
   return (
     <div style={{ height: "100%" }}>
-      <SchedulePage />
+      <Provider />
     </div>
   );
 }
