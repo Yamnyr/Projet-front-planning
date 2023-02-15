@@ -6,9 +6,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import RowManager from "./RowManager";
 
-function CalendarGrid() {
+function CalendarGrid({ month, year, displayRow }) {
   return (
-    <TableContainer sx={{ width: "100%", height: "100%" }}>
+    <TableContainer sx={{ width: "100%", height: "100%", overflow: "clip" }}>
       <Table
         sx={{
           width: "100%",
@@ -30,7 +30,7 @@ function CalendarGrid() {
             <TableCell sx={{ textAlign: "center" }}>Dimanche</TableCell>
           </TableRow>
         </TableHead>
-        <RowManager />
+        <RowManager month={month} year={year} displayRow={displayRow} />
       </Table>
     </TableContainer>
   );

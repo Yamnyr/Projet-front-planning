@@ -1,0 +1,35 @@
+import FormGroup from "@mui/material/FormGroup";
+import React from "react";
+import Group from "./Group";
+
+function Groups({ groups }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        margin: "3vw",
+        padding: "0.5vw",
+        border: "0.5px solid",
+      }}
+    >
+      <span
+        style={{
+          borderBottom: "0.5px solid",
+        }}
+      >
+        Vos groupes
+      </span>
+      <FormGroup>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* {groups.map((group) => { */}
+          {/*  <Group name={group.name} color={group.color}/>; */}
+          {/* })} */}
+          <Group />
+        </div>
+      </FormGroup>
+    </div>
+  );
+}
+
+export default Groups;

@@ -1,44 +1,33 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import useCalendar from "../../hooks/UseCalendar";
-import EventPopUp from "./Event/EventPopUp.jsx";
+import Event from "./Event";
+import ButtonEvent from "./ButtonEvent.jsx";
 
 function EventManager({ eventlist, day, month }) {
-  const { displayEvent } = useCalendar();
   const [displayEvents, setDisplayEvents] = useState("");
   const divRef = useRef(null);
-  const buttonPlusRef = useRef(null);
   const [buttonPlus, setButtonPlus] = useState("");
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    let events = eventlist.map((event) => (
+      <Event
+        height={eventlist.length > 3 ? 25 : 100 / eventlist.length - 4}
+        eventDescription={event}
+      />
+    ));
+
+    if (eventlist.length > 3) {
+      events = events.slice(0, 3);
+    }
     if (divRef.current) {
       const parentHeight = divRef.current.parentNode.clientHeight;
       divRef.current.style.maxHeight = `${parentHeight}px`;
-      if (eventlist.length > 3) {
-        setButtonPlus(
-          <button
-            ref={buttonPlusRef}
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-              width: "100%",
-              display: "flex",
-              flexGrow: 1,
-              backgroundColor: "#000000",
-              color: "#FFFFFF",
-              maxHeight: `${parentHeight * 0.1}px`,
-            }}
-          >
-            +{eventlist.length - 3}
-          </button>
-        );
-      }
     }
-  }, []);
-
-  useEffect(() => {
-    setDisplayEvents(displayEvent(eventlist));
-  }, []);
+    setDisplayEvents(events);
+    setButtonPlus(
+      <ButtonEvent eventlist={eventlist.slice(3)} divRef={divRef} />
+    );
+  }, [eventlist]);
 
   return (
     <div
@@ -114,7 +103,33 @@ EventManager.defaultProps = {
       heureDeb: null,
       heureFin: null,
       desc_event:
-        "Descriptionvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+        "Descriptionvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+    },
+    {
+      libEvent: "Event",
+      heureDeb: null,
+      heureFin: null,
+      desc_event: "Description",
+    },
+    {
+      libEvent: "Event",
+      heureDeb: null,
+      heureFin: null,
+      desc_event:
+        "Descriptionvyiffiiiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiiiigivtfbgyhunijjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+    },
+    {
+      libEvent: "Event",
+      heureDeb: null,
+      heureFin: null,
+      desc_event: "Description",
+    },
+    {
+      libEvent: "Event",
+      heureDeb: null,
+      heureFin: null,
+      desc_event:
+        "Descriptionvyiffiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii iiiigivtfbgyhunijjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjj",
     },
   ],
 };

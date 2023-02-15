@@ -3,13 +3,11 @@ import PropTypes from "prop-types";
 import TableBody from "@mui/material/TableBody";
 import useCalendar from "../../hooks/UseCalendar";
 
-function RowManager({ events }) {
-  const { month, year, displayRow } = useCalendar();
-  const [Rows, setRows] = useState([]);
+function RowManager({ events, month, year, displayRow }) {
+  const [Rows, setRows] = useState("");
 
   useEffect(() => {
-    console.log("ertet");
-    setRows([]);
+    setRows("");
     setRows(displayRow());
   }, [month, year]);
 

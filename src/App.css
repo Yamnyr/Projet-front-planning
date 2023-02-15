@@ -7,3 +7,11 @@
 .MuiPopover-paper{
   width : 50%;
 }
+
+.MuiTableContainer-root{
+  height: auto;
+}
+
+.css-uts851-MuiTableContainer-root{
+  height: auto;
+}
