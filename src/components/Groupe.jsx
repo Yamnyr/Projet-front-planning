@@ -68,9 +68,12 @@ function Groupe() {
       </div>
       <div
         style={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "20px",
           alignItems: "center",
           justifyContent: "center",
+          margin: "20px",
         }}
       >
         {filteredGroupes.map((group) => (
