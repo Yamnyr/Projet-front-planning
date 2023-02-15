@@ -9,6 +9,15 @@ export async function fetchGroupeByLib(lib) {
     response.json()
   );
 }
+export async function fetchGroupeById(id) {
+  return fetch(`${API_URL}/groupes/${id}`).then((response) => response.json());
+}
+
+export async function fetchDeleteUser(idgroupe, iduser) {
+  return fetch(`${API_URL}/user/${iduser}/group/${idgroupe}`, {
+    method: "DELETE",
+  }).then((response) => response.json());
+}
 
 export async function fetchNewGroupe(data, ListUserChecked) {
   return fetch(`${API_URL}/groupes`, {
@@ -46,4 +55,5 @@ export default {
   fetchAllGroupes,
   fetchNewGroupe,
   fetchGroupeByLib,
+  fetchDeleteUser,
 };
