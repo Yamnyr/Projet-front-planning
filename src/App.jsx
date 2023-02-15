@@ -7,8 +7,7 @@ import EventAdd from "./components/EventAdd.jsx";
 function App() {
   return (
     <div style={{ height: "100%" }}>
-      {/*<Provider />*/}
-        <EventAdd></EventAdd>
+      <Provider />
     </div>
 
   );
