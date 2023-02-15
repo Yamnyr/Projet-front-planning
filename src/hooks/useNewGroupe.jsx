@@ -4,6 +4,7 @@ import {
   fetchAllGroupes,
   fetchNewGroupe,
   fetchGroupeByLib,
+  fetchGroupeById,
 } from "../services/api/groupeApi";
 import Groupe from "../components/newGroupe/Groupe";
 

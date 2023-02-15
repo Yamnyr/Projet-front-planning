@@ -11,7 +11,7 @@ export default function Groupe({
     const d = groupe.utilisateurs.map((u) => (
       <div className="item" key={u.id}>
         <div>
-          {u.prenom_utilisateur} {u.nom_utilisateur}
+          {u.nom_utilisateur} {u.prenom_utilisateur}
         </div>
         <input
           type="checkbox"
