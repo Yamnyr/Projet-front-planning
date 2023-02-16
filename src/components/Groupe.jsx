@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { fetchAllGroupes } from "../services/api/groupeApi";
 
 function Groupe() {
@@ -136,9 +137,11 @@ function Groupe() {
               </>
             )}
             <button onClick={handleModalClose}>Fermer</button>
-            <button style={{ marginLeft: "20px" }} onClick="#">
-              Modifier
-            </button>
+            <Link to={`/edit/groupe/${modalGroup.id}`} className="text-navBar">
+              <button style={{ marginLeft: "20px" }} onClick="#">
+                Modifier
+              </button>
+            </Link>
           </div>
         </div>
       )}
