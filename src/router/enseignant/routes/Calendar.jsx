@@ -1,10 +1,10 @@
 import React from "react";
-import CalendarTable from "../../../components/CalendarTable";
+import SchedulePage from "../../../components/Calendar/SchedulePage";
 
 function Calendar() {
   return (
     <div>
-      <CalendarTable />
+      <SchedulePage />
     </div>
   );
 }

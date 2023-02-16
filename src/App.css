@@ -5,6 +5,18 @@
   margin: 0;
 }
 
+.MuiPopover-paper{
+  width : 50%;
+}
+
+.MuiTableContainer-root{
+  height: auto;
+}
+
+.css-uts851-MuiTableContainer-root {
+  height: auto;
+}
+
 .navbar-btn {
   display: flex;
   width: 100%;

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TableRow from "@mui/material/TableRow";
-import useCalendar from "../hooks/UseCalendar.jsx";
 
-function RowMaker({ start, month, events, day, end }) {
-  const { displayDate } = useCalendar();
+function RowMaker({ start, day, end, rowMaker, events, howManyRow }) {
   const [Row, setRow] = useState([]);
 
   useEffect(() => {
-    setRow(displayDate(day, month, start, end));
-  }, []);
+    setRow(rowMaker(start, end, day, events));
+  }, [events]);
 
-  return <TableRow>{Row}</TableRow>;
+  return (
+    <TableRow sx={{ verticalAlign: "top", height: `${howManyRow}%` }}>
+      {Row}
+    </TableRow>
+  );
 }
 
 RowMaker.propTypes = {

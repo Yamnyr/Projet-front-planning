@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TableBody from "@mui/material/TableBody";
-import useCalendar from "../hooks/UseCalendar";
+import useDisplay from "../../hooks/UseDisplay";
 
 function RowManager({ month, year, events }) {
-  const { displayRow } = useCalendar();
-  const [Rows, setRows] = useState([]);
+  const [Rows, setRows] = useState("");
+  const { displayRow } = useDisplay(year, month, events);
 
   useEffect(() => {
-    setRows(displayRow(month, year));
-  }, []);
+    setRows(displayRow(events));
+  }, [events]);
 
   return <TableBody sx={{ height: "95%" }}>{Rows}</TableBody>;
 }
 
 RowManager.propTypes = {
-  month: PropTypes.number,
-  year: PropTypes.number,
   events: PropTypes.array,
 };
 
 RowManager.defaultProps = {
-  month: new Date().getMonth() + 1,
-  year: new Date().getFullYear(),
   events: null,
 };
 
