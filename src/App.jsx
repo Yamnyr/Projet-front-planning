@@ -1,12 +1,10 @@
 import "./App.css";
-import CalendarTable from "./components/Calendar/CalendarTable";
-import MonthPicker from "./components/Calendar/MonthPicker";
+import SchedulePage from "./components/Calendar/SchedulePage";
 
 function App() {
   return (
     <div style={{ height: "100%" }}>
-      <MonthPicker />
-      <CalendarTable />
+      <SchedulePage />
     </div>
   );
 }

@@ -8,7 +8,7 @@ import RowManager from "./RowManager";
 
 function CalendarGrid() {
   return (
-    <TableContainer sx={{ width: "100%", height: "100%" }}>
+    <TableContainer sx={{ width: "100%", height: "100%", overflow: "clip" }}>
       <Table
         sx={{
           width: "100%",

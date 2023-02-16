@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
-import EventPopUp from "./Event/EventPopUp.jsx";
+import EventPopUp from "./PopUp/EventPopUp";
 
 function Event({ color, eventDescription, height }) {
   const buttonRef = useRef(null);
@@ -29,7 +28,7 @@ function Event({ color, eventDescription, height }) {
     const ScreenWidth = window.innerWidth;
     setPositionTop(ScreenHeight / 2);
     setPositionLeft(ScreenWidth / 2);
-  }, []);
+  }, [eventDescription]);
   return (
     <>
       <button

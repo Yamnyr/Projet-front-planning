@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TableBody from "@mui/material/TableBody";
 import useCalendar from "../../hooks/UseCalendar";
+import useDisplayCalendar from "../../hooks/useDisplayCalendar";
+import { CalendarContext } from "../../context/CalendarContext";
 
 function RowManager({ events }) {
-  const { month, year, displayRow } = useCalendar();
-  const [Rows, setRows] = useState([]);
+  const { month, year } = useContext(CalendarContext);
+  const { displayRow } = useDisplayCalendar();
+  const [Rows, setRows] = useState("");
 
   useEffect(() => {
-    console.log("ertet");
-    setRows([]);
+    setRows("");
     setRows(displayRow());
   }, [month, year]);
 

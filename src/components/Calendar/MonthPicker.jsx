@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import TextField from "@mui/material/TextField";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { LocalizationProvider } from "@mui/x-date-pickers";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import useCalendar from "../../hooks/UseCalendar";
+import { CalendarContext } from "../../context/CalendarContext";
+import { updateDate } from "../../action/CalendarActions";
 
 function MonthPicker() {
-  const { month, year, updateDate } = useCalendar();
+  const { dispatch, month, year } = useContext(CalendarContext);
   const [value, setValue] = React.useState(dayjs(`${year}-${month}-04`));
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
@@ -24,8 +22,7 @@ function MonthPicker() {
         value={value}
         onChange={(newValue) => {
           setValue(newValue);
-          updateDate(newValue);
-          console.log(month);
+          dispatch(updateDate(newValue));
         }}
         renderInput={(params) => <TextField {...params} helperText={null} />}
       />
