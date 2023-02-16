@@ -39,10 +39,6 @@ export default function useNewEvenement() {
       
     `);
         addEvent({date}, {groupeConcerne}, {nom} , {description});
-        /*setNom('');
-        setDate('');
-        setDescription('');
-        setGroupeConcerne([]);*/
     };
     function addEvent({date}, {groupeConcerne}, {nom}, {description}) {
         api
