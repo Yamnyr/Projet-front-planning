@@ -27,10 +27,11 @@ function NavBar() {
       <div className="navbar-btn">
         <div className="size-left-btn">
           <Button icon={faUsers} text="Les groupes" link="groupes" />
+          <Button icon={faUsers} text="Créer un groupe" link="add/groupe" />
           <Button
             icon={faCalendarDay}
             text="Créer un événement"
-            link="add/groupe"
+            link="add/evenement"
           />
         </div>
         <div className="size-right-btn">
