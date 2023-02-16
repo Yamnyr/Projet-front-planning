@@ -81,7 +81,6 @@ export function Form() {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <text>{userData.userId}</text>
             <h1>Nouvel Evenement</h1>
             <label>Nom</label>
             <input
@@ -112,7 +111,7 @@ export function Form() {
             <label>Groupe concerné</label>
             <div className="scroll">
                 {groupesList.map((group) => (
-                    <label className="checkbox">
+                    <label className="checkbox" key={group.id}>
                         <input
                             className="checkbox"
                             type="checkbox"
