@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchAllGroupes } from "../services/api/groupeApi";
+import { fetchDeleteGroupe, fetchAllGroupes } from "../services/api/groupeApi";
 
 function Groupe() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,6 +35,13 @@ function Groupe() {
     fetchAllGroupes({ q: search }).then((response) => {
       setGroupesList(response["hydra:member"]);
     });
+  };
+
+  const handleDelete = (id) => {
+    fetchDeleteGroupe(id).then(() => {
+      setGroupesList(groupe.filter((groupe) => groupe.id !== id));
+    });
+    alert("Le groupe a bien été supprimé");
   };
 
   return (
@@ -137,11 +143,19 @@ function Groupe() {
               </>
             )}
             <button onClick={handleModalClose}>Fermer</button>
-            <Link to={`/edit/groupe/${modalGroup.id}`} className="text-navBar">
-              <button style={{ marginLeft: "20px" }} onClick="#">
-                Modifier
-              </button>
-            </Link>
+            <button style={{ marginLeft: "20px" }} onClick="#">
+              Modifier
+            </button>
+            <button
+              style={{
+                marginLeft: "20px",
+                backgroundColor: "red",
+                color: "white",
+              }}
+              onClick={() => handleDelete(modalGroup.id)}
+            >
+              Supprimer
+            </button>
           </div>
         </div>
       )}
