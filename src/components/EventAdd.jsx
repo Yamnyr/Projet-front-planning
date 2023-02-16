@@ -6,79 +6,20 @@ import axios from "axios";
 import { fetchAllGroupes } from "../services/api/evenementApi";
 import "../App.css";
 import UserContext from "../Context/index";
+import useNewGroupe from "../hooks/useNewGroupe.jsx";
+import useNewEvenement from "../hooks/UseNewEvenement.jsx";
 
 /*
 import saveData from "./test"; */
 
 export function Form() {
-    const [nom, setNom] = useState("");
-    const [date, setDate] = useState("");
-    const [description, setDescription] = useState("");
-    const [groupeConcerne, setGroupeConcerne] = useState([]);
+    const {
+        formState: { errors },
+    } = useForm();
+    console.log(errors);
 
-    const [groupesList, setGroupesList] = useState([]);
-    const [result, setResult] = useState('')
-    const { userData } = React.useContext(UserContext);
-
-    const api = axios.create({
-        baseURL: "http://127.0.0.1:8000",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-
-    useEffect(() => {
-        fetchAllGroupes().then((response) => {
-            setGroupesList(response["hydra:member"]);
-        });
-    }, []);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(`
-      Nom: ${nom}
-      Date: ${date}
-      Description: ${description}
-      GroupeConcerne: ${groupeConcerne}
-      user: api/utilisateurs/${userData.userId}
-      
-    `);
-    addEvent({date}, {groupeConcerne}, {nom} , {description});
-        /*setNom('');
-        setDate('');
-        setDescription('');
-        setGroupeConcerne([]);*/
-    };
-    function addEvent({date}, {groupeConcerne}, {nom}, {description}) {
-        api
-            .post("/api/evenements", {
-                "date": date,
-                "concerne": groupeConcerne
-                ,
-                "utilisateur": `api/utilisateurs/${userData.userId}`,
-                "libEvenement": nom,
-                "descEvenement": description
-            })
-            .then((response) => {
-                console.log("success")
-                setResult("Evenement ajouté avec succes");
-            })
-            .catch((error) => {
-                console.log("error");
-                setResult('l\'Evénement n\'a pas été ajoute, vérifiez que les champs soient bien remplis');
-            });
-    }
-
-    function toggleValue(val) {
-        const index = groupeConcerne.indexOf(val);
-        if (index > -1) {
-            const newGroupeConcerne = [...groupeConcerne];
-            newGroupeConcerne.splice(index, 1);
-            setGroupeConcerne(newGroupeConcerne);
-        } else {
-            setGroupeConcerne([...groupeConcerne, val]);
-        }
-    }
+    const { toggleValue, setDescription, setDate, setNom, nom, date, description, groupesList, result, handleSubmit } =
+        useNewEvenement();
     return (
         <form onSubmit={handleSubmit}>
             <h1>Nouvel Evenement</h1>
