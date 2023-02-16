@@ -39,8 +39,7 @@ export default function EventPopUp({ event }) {
             marginBottom: "10px",
           }}
         >
-          {" "}
-          Date{" "}
+          {event.date.substring(8, 10)}/{event.date.substring(5, 7)}
         </h3>
       </div>
       <div>

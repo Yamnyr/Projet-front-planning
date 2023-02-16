@@ -1,33 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import Event from "./Event";
-import ButtonEvent from "./ButtonEvent.jsx";
+import ButtonEvent from "./ButtonEvent";
+import event from "./Event";
 
-function EventManager({ eventlist, day, month }) {
+function EventManager({ eventlist, day, month, year, eventManager }) {
   const [displayEvents, setDisplayEvents] = useState("");
   const divRef = useRef(null);
   const [buttonPlus, setButtonPlus] = useState("");
 
   useEffect(() => {
-    let events = eventlist.map((event) => (
-      <Event
-        height={eventlist.length > 3 ? 25 : 100 / eventlist.length - 4}
-        eventDescription={event}
-      />
-    ));
-
-    if (eventlist.length > 3) {
-      events = events.slice(0, 3);
+    setDisplayEvents(eventManager(eventlist, divRef));
+    if (eventlist > 3) {
+      setButtonPlus(
+        <ButtonEvent eventlist={eventlist.slice(3)} divRef={divRef} />
+      );
     }
-    if (divRef.current) {
-      const parentHeight = divRef.current.parentNode.clientHeight;
-      divRef.current.style.maxHeight = `${parentHeight}px`;
-    }
-    setDisplayEvents(events);
-    setButtonPlus(
-      <ButtonEvent eventlist={eventlist.slice(3)} divRef={divRef} />
-    );
-  }, [eventlist]);
+  }, [year, month, eventlist]);
 
   return (
     <div

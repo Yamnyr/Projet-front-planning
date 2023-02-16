@@ -1,8 +1,13 @@
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import React from "react";
+import React, { useState } from "react";
 
-function Group({ name, color }) {
+function Group({ name, color, handleChange }) {
+  const [checked, setChecked] = useState(true);
+  const handleChecked = () => {
+    handleChange(name, !checked);
+    setChecked(!checked);
+  };
   return (
     <div
       style={{
@@ -14,15 +19,16 @@ function Group({ name, color }) {
         control={
           <Checkbox
             sx={{
-              color: "#ba4931",
+              color,
               "&.Mui-checked": {
-                color: "#ba4931",
+                color,
               },
             }}
-            defaultChecked
+            checked={checked}
+            onChange={() => handleChecked()}
           />
         }
-        label="Groupe 1"
+        label={name}
       />
     </div>
   );

@@ -4,15 +4,16 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import CircularProgress from "@mui/material/CircularProgress";
 import RowManager from "./RowManager";
 
-function CalendarGrid({ month, year, displayRow }) {
+function CalendarGrid({ month, year, events }) {
   return (
     <TableContainer sx={{ width: "100%", height: "100%", overflow: "clip" }}>
       <Table
         sx={{
           width: "100%",
-          height: "100%",
+          height: "98%",
           tableLayout: "fixed",
           lineHeight: "20px",
         }}
@@ -30,7 +31,7 @@ function CalendarGrid({ month, year, displayRow }) {
             <TableCell sx={{ textAlign: "center" }}>Dimanche</TableCell>
           </TableRow>
         </TableHead>
-        <RowManager month={month} year={year} displayRow={displayRow} />
+        <RowManager month={month} year={year} events={events} />
       </Table>
     </TableContainer>
   );

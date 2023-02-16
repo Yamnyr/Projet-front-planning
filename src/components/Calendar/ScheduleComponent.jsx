@@ -1,9 +1,10 @@
 import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 import CalendarTable from "./CalendarTable";
 import MonthPicker from "./MonthPicker";
 import useCalendar from "../../hooks/UseCalendar";
 
-function ScheduleComponent({ month, year, displayRow, updateDate }) {
+function ScheduleComponent({ month, year, updateDate, events, waiting }) {
   return (
     <div
       style={{
@@ -15,7 +16,21 @@ function ScheduleComponent({ month, year, displayRow, updateDate }) {
     >
       <div>
         <MonthPicker month={month} year={year} updateDate={updateDate} />
-        <CalendarTable displayRow={displayRow} month={month} year={year} />
+        {waiting ? (
+          <div
+            style={{
+              height: "100%",
+              width: "40vw",
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress />
+          </div>
+        ) : (
+          <CalendarTable month={month} year={year} events={events} />
+        )}
       </div>
     </div>
   );

@@ -5,17 +5,18 @@ import AdminButtons from "./AdminButtons";
 import useCalendar from "../../hooks/UseCalendar.jsx";
 
 function SchedulePage() {
-  const { month, year, updateDate, displayRow } = useCalendar();
+  const { month, groups, year, events, waiting, updateDate, updateGroups } =
+    useCalendar();
   return (
     <div1
       style={{
         width: "100%",
-        height: "100%",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <AdminButtons />
+      {/* <AdminButtons /> */}
       <div
         style={{
           display: "flex",
@@ -25,12 +26,13 @@ function SchedulePage() {
           marginTop: "7vh",
         }}
       >
-        <Groups />
+        <Groups groups={groups} updateGroups={updateGroups} />
         <ScheduleComponent
-          displayRow={displayRow}
           month={month}
           year={year}
           updateDate={updateDate}
+          events={events}
+          waiting={waiting}
         />
       </div>
     </div1>

@@ -1,8 +1,33 @@
 import FormGroup from "@mui/material/FormGroup";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Group from "./Group";
 
-function Groups({ groups }) {
+function Groups({ groups, updateGroups }) {
+  const [activeGroups, setActiveGroups] = useState([]);
+
+  useEffect(() => {
+    setActiveGroups(groups);
+  }, [groups]);
+  const handleGroupChange = (groupName, isChecked) => {
+    if (!isChecked) {
+      setActiveGroups(
+        activeGroups.filter((item) => item.lib_groupe !== groupName)
+      );
+      updateGroups(
+        activeGroups.filter((item) => item.lib_groupe !== groupName)
+      );
+    } else {
+      const groupsCopy = groups;
+      const objectToAdd = groupsCopy.find(
+        (item) => item.lib_groupe === groupName
+      );
+
+      if (objectToAdd) {
+        setActiveGroups([...activeGroups, objectToAdd]);
+        updateGroups([...activeGroups, objectToAdd]);
+      }
+    }
+  };
   return (
     <div
       style={{
@@ -22,10 +47,13 @@ function Groups({ groups }) {
       </span>
       <FormGroup>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* {groups.map((group) => { */}
-          {/*  <Group name={group.name} color={group.color}/>; */}
-          {/* })} */}
-          <Group />
+          {groups.map((group) => (
+            <Group
+              name={group.lib_groupe}
+              color={group.color}
+              handleChange={handleGroupChange}
+            />
+          ))}
         </div>
       </FormGroup>
     </div>

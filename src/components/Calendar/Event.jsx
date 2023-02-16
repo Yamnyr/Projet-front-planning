@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Popover from "@mui/material/Popover";
 import EventPopUp from "./PopUp/EventPopUp";
 
-function Event({ color, eventDescription, height }) {
+function Event({ eventDescription, height }) {
   const buttonRef = useRef(null);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [positionTop, setPositionTop] = useState(0);
@@ -40,7 +40,7 @@ function Event({ color, eventDescription, height }) {
           overflow: "hidden",
           borderRadius: "10px",
           width: "100%",
-          backgroundColor: color,
+          backgroundColor: eventDescription.color,
           marginBottom: "1%",
         }}
       >
@@ -99,7 +99,6 @@ function Event({ color, eventDescription, height }) {
 }
 
 Event.propTypes = {
-  color: PropTypes.string,
   height: PropTypes.number,
   eventDescription: PropTypes.shape({
     libEvent: PropTypes.string,
@@ -109,7 +108,6 @@ Event.propTypes = {
 
 Event.defaultProps = {
   height: 100,
-  color: "#bb3e03",
   eventDescription: {
     libEvent: "Event",
     desc_event: "Description",
