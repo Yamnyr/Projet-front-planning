@@ -31,7 +31,7 @@ function NavBar() {
           <Button
             icon={faCalendarDay}
             text="Créer un événement"
-            link="add/groupe"
+            link="add/evenement"
           />
         </div>
         <div className="size-right-btn">
