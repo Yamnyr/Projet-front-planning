@@ -40,6 +40,7 @@ export function Form() {
       Date: ${date}
       Description: ${description}
       GroupeConcerne: ${groupeConcerne}
+      user: api/utilisateurs/${userData.userId}
       
     `);
     addEvent({date}, {groupeConcerne}, {nom} , {description});
@@ -54,7 +55,7 @@ export function Form() {
                 "date": date,
                 "concerne": groupeConcerne
                 ,
-                "utilisateur": `api/utilisateurs/${userData.id}`,
+                "utilisateur": `api/utilisateurs/${userData.userId}`,
                 "libEvenement": nom,
                 "descEvenement": description
             })
@@ -80,6 +81,7 @@ export function Form() {
     }
     return (
         <form onSubmit={handleSubmit}>
+            <text>{userData.userId}</text>
             <h1>Nouvel Evenement</h1>
             <label>Nom</label>
             <input

@@ -5,6 +5,7 @@ function Groupe() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalGroup, setModalGroup] = useState({});
   const [groupesList, setGroupesList] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchAllGroupes().then((response) => {
@@ -21,20 +22,61 @@ function Groupe() {
     setModalOpen(false);
   };
 
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredGroupes = groupesList.filter((group) =>
+    group.lib_groupe.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    fetchAllGroupes({ q: search }).then((response) => {
+      setGroupesList(response["hydra:member"]);
+    });
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: "center", fontWeight: "bold" }}>
         Liste des groupes
       </h1>
+      <div style={{ textAlign: "center" }}>
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            placeholder="Recherche par nom de groupe"
+            value={search}
+            onChange={handleSearchChange}
+            style={{
+              marginBottom: "20px",
+              width: 300,
+              height: 45,
+              boxShadow: "initial",
+            }}
+          />
+        </form>
+      </div>
       <hr style={{ width: 400 }} />
+      <div>
+        {filteredGroupes.length === 0 && (
+          <p style={{ textAlign: "center", color: "red" }}>
+            Aucun résultat trouvé pour "{search}"
+          </p>
+        )}
+      </div>
       <div
         style={{
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: "20px",
           alignItems: "center",
           justifyContent: "center",
+          margin: "20px",
         }}
       >
-        {groupesList.map((group) => (
+        {filteredGroupes.map((group) => (
           <div
             key={group.lib_groupe}
             style={{
