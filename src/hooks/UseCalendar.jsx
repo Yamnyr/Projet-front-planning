@@ -25,10 +25,15 @@ function useCalendar() {
     const shuffledEvents = [];
     const eventPromises = activeGroups.map((activeGroup) =>
       fetchEvents(
-        `${year}-${month < 10 ? `0${month}` : month}`,
+        `${month === 1 ? year - 1 : year}-${
+          month === 1 ? "12" : month - 1 < 10 ? `0${month - 1}` : month - 1
+        } -22`,
+        `${month === 12 ? year + 1 : year}-${
+          month === 12 ? "01" : month + 1 < 10 ? `0${month + 1}` : month + 1
+        }-06`,
         activeGroup.lib_groupe
       ).then((events) =>
-        events["hydra:member"].map((event) => ({
+        events[0].map((event) => ({
           libEvent: event.lib_evenement,
           date: event.date,
           desc_event: event.desc_evenement,
