@@ -12,11 +12,56 @@ function useCalendar() {
   const filterEvents = (event) =>
     event.sort((a, b) => new Date(a.date) - new Date(b.date));
 
+  function extractParentGroup(groups) {
+    const result = [];
+
+    function getAllChildGroups(group) {
+      if (!group || !group.groupe_parent) {
+        return [];
+      }
+
+      const childGroups = getAllChildGroups(group.groupe_parent);
+      return [...childGroups, group.groupe_parent];
+    }
+
+    groups.forEach((group) => {
+      const allGroups = [...getAllChildGroups(group), group];
+      const existingGroupIndex = result.findIndex(
+        (g) => g.lib_groupe === group.groupe_parent.lib_groupe
+      );
+
+      if (existingGroupIndex === -1) {
+        result.push({
+          lib_groupe: group.groupe_parent.lib_groupe,
+          desc_groupe: group.groupe_parent.desc_groupe,
+          color: group.groupe_parent.color,
+        });
+      }
+
+      allGroups.forEach((g) => {
+        const existingGroupIndex = result.findIndex(
+          (r) => r.lib_groupe === g.lib_groupe
+        );
+
+        if (existingGroupIndex === -1) {
+          result.push({
+            lib_groupe: g.lib_groupe,
+            desc_groupe: g.desc_groupe,
+            color: g.color,
+          });
+        }
+      });
+    });
+
+    return result;
+  }
+
   useEffect(() => {
     setWaiting(true);
     fetchGroups().then((data) => {
-      setGroups(data);
-      setActiveGroups(data);
+      const filterGroup = extractParentGroup(data);
+      setGroups(filterGroup);
+      setActiveGroups(filterGroup);
     });
   }, []);
 
@@ -32,14 +77,17 @@ function useCalendar() {
           month === 12 ? "01" : month + 1 < 10 ? `0${month + 1}` : month + 1
         }-06`,
         activeGroup.lib_groupe
-      ).then((events) =>
-        events[0].map((event) => ({
-          libEvent: event.lib_evenement,
-          date: event.date,
-          desc_event: event.desc_evenement,
-          color: activeGroup.color,
-        }))
-      )
+      ).then((events) => {
+        if (events.length > 0) {
+          return events[0].map((event) => ({
+            libEvent: event.lib_evenement,
+            date: event.date,
+            desc_event: event.desc_evenement,
+            color: activeGroup.color,
+          }));
+        }
+        return [];
+      })
     );
     Promise.all(eventPromises).then((eventArrays) => {
       eventArrays.forEach((events) => {
