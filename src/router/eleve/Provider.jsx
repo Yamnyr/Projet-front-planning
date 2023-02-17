@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Calendar from "./routes/Calendar";
 import Root from "./routes/Root";
 import Navbar from "../../components/Navbar/NavBarEleve";
+import Login from "./routes/Login.jsx";
 
 function Provider() {
   const router = createBrowserRouter([

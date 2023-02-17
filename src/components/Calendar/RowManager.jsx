@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TableBody from "@mui/material/TableBody";
-import useDisplay from "../../hooks/UseDisplay";
+import useDisplay from "../../hooks/UseDisplayCalendar";
 
 function RowManager({ month, year, events }) {
   const [Rows, setRows] = useState("");
