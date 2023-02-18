@@ -7,6 +7,7 @@ import useCalendar from "../../hooks/UseCalendar.jsx";
 function SchedulePage() {
   const { month, groups, year, events, waiting, updateDate, updateGroups } =
     useCalendar();
+
   return (
     <div1
       style={{
