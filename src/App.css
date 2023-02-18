@@ -5,11 +5,11 @@
   margin: 0;
 }
 
-.MuiPopover-paper{
-  width : 50%;
+.MuiPopover-paper {
+  width: 50%;
 }
 
-.MuiTableContainer-root{
+.MuiTableContainer-root {
   height: auto;
 }
 
@@ -554,4 +554,124 @@ hr {
   font-weight: bold;
   cursor: pointer;
   translate: 0.2em;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-container .left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+}
+
+.login-container .left-side .logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-container .right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100vh;
+  background-color: #0a3054;
+}
+
+.right-side form {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+}
+
+.right-side form input[type="text"],
+.right-side form input[type="password"] {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+  border: solid 1px rgb(5, 4, 4);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 2px -2px gray;
+  font-size: 20px;
+  text-align: center;
+}
+
+.right-side form label {
+  color: rgb(5, 4, 4);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1024px) {
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .login-container .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vw;
+    background-color: rgb(255, 255, 255);
+  }
+  .login-container .left-side img {
+    width: 100vw;
+  }
+
+  .login-container .right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 170vw;
+    background-color: #0a3054;
+  }
+  .login-container .right-side form {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 100vw;
+  }
+  .right-side form label {
+    color: rgb(5, 4, 4);
+    font-size: 100%;
+    font-weight: bold;
+  }
+
+  .login-container .right-side form .button-connect {
+    width: 100%;
+    height: 10vw;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 2px -2px gray;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+  }
 }
