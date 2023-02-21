@@ -4,3 +4,36 @@ const API_URL = `${BASE_URL}/api`;
 export async function fetchAllGroupes() {
     return fetch(`${API_URL}/groupes`).then((response) => response.json());
 }
+export async function fetchAllEvenements() {
+    return fetch(`${API_URL}/evenements`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    }).then((response) => response.json());
+}
+export async function fetchEvenementByLib(lib) {
+    return fetch(`${API_URL}/evenements?lib_evenement=${lib}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    }).then((response) => response.json());
+}
+
+export async function fetchDeleteEvenement(id) {
+    return fetch(`${API_URL}/evenements/${id}`, {
+        method: "DELETE",
+    });
+}
+export async function fetchEvenementById(id) {
+    return fetch(`${API_URL}/evenements/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+    }).then((response) => response.json());
+}

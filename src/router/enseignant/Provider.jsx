@@ -7,6 +7,9 @@ import NewGroupe from "./routes/NewGroupe";
 import Groupe from "./routes/Groupe";
 import EditGroupe from "./routes/EditGroupe";
 import CreateEvent from "./routes/CreateEvent.jsx";
+import Evenement from "./routes/Evenement.jsx";
+import EditEvenement from "./routes/EditEvenement.jsx";
+import EditEvent from "./routes/EditEvenement.jsx";
 
 function Provider() {
   const router = createBrowserRouter([
@@ -38,6 +41,14 @@ function Provider() {
         {
           path: "/add/evenement",
           element: <CreateEvent />,
+        },
+        {
+          path: "/evenement",
+          element: <Evenement />,
+        },
+        {
+          path: "/edit/evenement/:idEvenement",
+          element: <EditEvent />,
         },
       ],
     },

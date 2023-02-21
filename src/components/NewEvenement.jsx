@@ -76,6 +76,6 @@ export function Form() {
   );
 }
 
-export default function EventAdd() {
+export default function NewEvenement() {
   return <Form />;
 }
