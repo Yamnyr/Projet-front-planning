@@ -4,6 +4,7 @@ import {
 } from "../services/api/groupeApi";
 import UserContext from "../Context/index.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function useNewEvenement() {
     const [nom, setNom] = useState("");
@@ -31,13 +32,12 @@ export default function useNewEvenement() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(`
-      Nom: ${nom}
-      Date: ${date}
-      Description: ${description}
-      GroupeConcerne: ${groupeConcerne}
-      user: api/utilisateurs/${userData.userId}
-      
-    `);
+          Nom: ${nom}
+          Date: ${date}
+          Description: ${description}
+          GroupeConcerne: ${groupeConcerne}
+          user: api/utilisateurs/${userData.userId}
+        `);
         addEvent({date}, {groupeConcerne}, {nom} , {description});
     };
     function addEvent({date}, {groupeConcerne}, {nom}, {description}) {

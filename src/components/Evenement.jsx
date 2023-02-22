@@ -131,7 +131,7 @@ export function Evenement() {
                     >
                         <h2>{modalEvent.lib_evenement}</h2>
                         <p>{modalEvent.desc_evenement}</p>
-                        <p>{modalEvent.date}</p>
+                        <p><h4>prévu le : </h4>{new Date(modalEvent.date).toLocaleDateString()}</p>
                         <h4>Groupe concernée :</h4>
                         {modalEvent.concerne.map((groupe) => (
                             <p key={groupe.id}><li >{groupe.lib_groupe}</li></p>

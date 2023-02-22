@@ -37,3 +37,14 @@ export async function fetchEvenementById(id) {
         },
     }).then((response) => response.json());
 }
+export async function fetchEditEvenement(idevenement, data) {
+    return fetch(`${API_URL}/evenements/${idevenement}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({data}
+        ),
+    }).then((response) => response.json());
+}

@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
-import { useForm } from "react-hook-form";
 import moment from "moment";
 import "../App.css";
-import useNewEvenement from "../hooks/UseNewEvenement";
 import {useParams} from "react-router-dom";
-import {fetchEvenementById} from "../services/api/evenementApi";
+import {fetchEditEvenement, fetchEvenementById} from "../services/api/evenementApi";
 import {fetchAllGroupes} from "../services/api/groupeApi.js";
 
 /*
@@ -13,7 +11,9 @@ import saveData from "./test"; */
 export function Form() {
     const { idEvenement } = useParams();
     const [groupesList, setGroupesList] = useState([]);
-    const [Evenement, setEvenement] = useState({ lib_evenement: "", date_evenement: "", description_evenement: "" });
+    const [Evenement, setEvenement] = useState({ lib_evenement: "", date_evenement: "", desc_evenement: "" });
+
+    const [groupeConcerne, setGroupeConcerne] = useState([]);
 
     useEffect(() => {
         fetchAllGroupes().then((response) => {
@@ -23,17 +23,14 @@ export function Form() {
 
     useEffect(() => {
         fetchEvenementById(idEvenement).then((data) => {
-            console.log(data.concerne[0].id)
             const isoDate = data.date;
             const formattedDate = isoDate.slice(0, 10);
-            setEvenement({ lib_evenement: data.lib_evenement, date_evenement: formattedDate, description_evenement: data.desc_evenement, concerne: data.concerne });
+            setEvenement({ lib_evenement: data.lib_evenement, date_evenement: formattedDate, desc_evenement: data.desc_evenement, concerne: groupeConcerne });
+            setGroupeConcerne(data.concerne.map((grp) => `api/groupes/${grp.id}`));
+            console.log(groupeConcerne)
         });
+        console.log(Evenement)
     }, [idEvenement]);
-
-    // const {
-    //     formState: { errors },
-    // } = useForm();
-    // console.log(errors);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -42,10 +39,20 @@ export function Form() {
             [name]: value,
         }));
     };
-
+    function toggleValue(val) {
+        const index = groupeConcerne.indexOf(val);
+        if (index > -1) {
+            const newGroupeConcerne = [...groupeConcerne];
+            newGroupeConcerne.splice(index, 1);
+            setGroupeConcerne(newGroupeConcerne);
+        } else {
+            setGroupeConcerne([...groupeConcerne, val]);
+        }
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        // faire quelque chose avec les données du formulaire
+        console.log(Evenement)
+        fetchEditEvenement(Evenement).then(r => console.log(r))
     };
     return (
         <form className="form-evenement" onSubmit={handleSubmit}>
@@ -57,7 +64,8 @@ export function Form() {
                 id="nom"
                 name="nom"
                 value={Evenement.lib_evenement}
-                onChange={(e) => setNom(e.target.value)}
+                // onChange={(e) => setNom(e.target.value)}
+                onChange={(e) => setEvenement({lib_evenement: e.target.value})}
             />
             <label>Date</label>
             <input
@@ -67,14 +75,16 @@ export function Form() {
                 id="date"
                 value={Evenement.date_evenement}
                 min={moment().format("YYYY-MM-DD")}
-                onChange={(e) => setDate(e.target.value)}
+                // onChange={(e) => setDate(e.target.value)}
+                onChange={(e) => setEvenement({date_evenement: e.target.value})}
             />
             <label>Description</label>
             <textarea
                 name="description"
                 id="description"
-                value={Evenement.description_evenement}
-                onChange={(e) => setDescription(e.target.value)}
+                value={Evenement.desc_evenement}
+                // onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setEvenement({desc_evenement: e.target.value})}
             />
             <label>Groupe concerné</label>
             <div className="scroll">
@@ -86,6 +96,7 @@ export function Form() {
                             id={group.id}
                             name="interest"
                             value={`${group.id}`}
+                            checked={groupeConcerne.includes(`api/groupes/${group.id}`)}
                             onChange={(e) => toggleValue(`api/groupes/${e.target.value}`)}
                         />
                         <span>{`${group.lib_groupe}`}</span>
