@@ -5,47 +5,21 @@ import "../App.css";
 import useNewEvenement from "../hooks/UseNewEvenement";
 import {fetchAllGroupes} from "../services/api/groupeApi.js";
 import {Link} from "react-router-dom";
-import {fetchAllEvenements, fetchDeleteEvenement} from "../services/api/evenementApi.js";
+import useEvenement from "../hooks/useEvenement";
 
 export function Evenement() {
-    const [evenementList, setEvenementList] = useState([]);
-    const [search, setSearch] = useState("");4
 
-
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalEvent, setModalEvent] = useState({});
-
-    const handleEventClick = (event) => {
-        setModalOpen(true);
-        setModalEvent(event);
-    };
-
-    const handleModalClose = () => {
-        setModalOpen(false);
-    };
-
-    useEffect(() => {
-        fetchAllEvenements().then((response) => {
-            setEvenementList(response["hydra:member"]);
-        });
-    }, [evenementList]);
-    const deleteEvent = (id) => {
-        fetchDeleteEvenement(id).then(handleModalClose);
-    }
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        fetchAllEvenements({ e: search }).then((response) => {
-            setEvenementList(response["hydra:member"]);
-        });
-    };
-    const handleSearchChange = (event) => {
-        setSearch(event.target.value);
-    };
-
-    const filteredEvenements = evenementList.filter((evenement) =>
-        evenement.lib_evenement.toLowerCase().includes(search.toLowerCase())
-    );
-
+    const {
+        handleSearchSubmit,
+        handleSearchChange,
+        handleEventClick,
+        handleModalClose,
+        deleteEvent,
+        filteredEvenements,
+        modalOpen,
+        modalEvent,
+        search,
+    } = useEvenement();
     return (
         <div>
             <h1 style={{ textAlign: "center", fontWeight: "bold" }}>
@@ -130,8 +104,8 @@ export function Evenement() {
                         }}
                     >
                         <h2>{modalEvent.lib_evenement}</h2>
-                        <p>{modalEvent.desc_evenement}</p>
-                        <p><h4>prévu le : </h4>{new Date(modalEvent.date).toLocaleDateString()}</p>
+                        <li>{modalEvent.desc_evenement}</li>
+                        <h4>prévu le : </h4><li>{new Date(modalEvent.date).toLocaleDateString()}</li>
                         <h4>Groupe concernée :</h4>
                         {modalEvent.concerne.map((groupe) => (
                             <p key={groupe.id}><li >{groupe.lib_groupe}</li></p>
