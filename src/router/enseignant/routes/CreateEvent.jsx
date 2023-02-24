@@ -1,10 +1,10 @@
 import React from "react";
-import EventAdd from "../../../components/EventAdd";
+import NewEvenement from "../../../components/NewEvenement.jsx";
 
 function CreateEvent() {
     return (
         <div>
-            <EventAdd />
+            <NewEvenement />
         </div>
     );
 }

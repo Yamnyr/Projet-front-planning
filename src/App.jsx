@@ -2,7 +2,7 @@
 import React from "react";
 import "./App.css";
 import Provider from "./Context/Provider";
-import EventAdd from "./components/EventAdd.jsx";
+import EventAdd from "./components/NewEvenement.jsx";
 
 function App() {
   return (
@@ -14,3 +14,4 @@ function App() {
 }
 
 export default App;
+
