@@ -1,12 +1,12 @@
 import React from "react";
-import EventAdd from "../../../components/EventAdd";
+import Evenement from "../../../components/Evenement";
 
-function Evenement() {
-  return (
-    <div>
-      <EventAdd />
-    </div>
-  );
+function ListEvenement() {
+    return (
+        <div>
+            <Evenement />
+        </div>
+    );
 }
 
-export default Evenement;
+export default ListEvenement;

@@ -7,6 +7,7 @@ function Groups({ groups, updateGroups }) {
 
   useEffect(() => {
     setActiveGroups(groups);
+    console.log("groups", groups);
   }, [groups]);
   const handleGroupChange = (groupName, isChecked) => {
     if (!isChecked) {
@@ -47,13 +48,13 @@ function Groups({ groups, updateGroups }) {
       </span>
       <FormGroup>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {groups.map((group) => (
+          {/* {groups.map((group) => (
             <Group
               name={group.lib_groupe}
               color={group.color}
               handleChange={handleGroupChange}
             />
-          ))}
+          ))} */}
         </div>
       </FormGroup>
     </div>
