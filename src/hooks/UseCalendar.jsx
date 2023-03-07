@@ -14,6 +14,7 @@ function useCalendar() {
 
   function extractParentGroup(groups) {
     const result = [];
+    const addedGroups = {};
 
     function getAllChildGroups(group) {
       if (!group || !group.groupe_parent) {
@@ -25,40 +26,47 @@ function useCalendar() {
     }
 
     groups.forEach((group) => {
-      const allGroups = [...getAllChildGroups(group), group];
-      const existingGroupIndex = result.findIndex(
-        (g) => g.lib_groupe === group.groupe_parent.lib_groupe
-      );
+      if (!group.groupe_parent) {
+        // le groupe n'a pas de parent, on l'ajoute directement au résultat
+        if (!addedGroups[group.lib_groupe]) {
+          result.push({
+            lib_groupe: group.lib_groupe,
+            desc_groupe: group.desc_groupe,
+            color: group.color,
+          });
+          addedGroups[group.lib_groupe] = true;
+        }
+      } else {
+        // le groupe a un parent, on ajoute le parent et tous les groupes enfants
+        const allGroups = [...getAllChildGroups(group), group];
+        if (!addedGroups[group.groupe_parent.lib_groupe]) {
+          result.push({
+            lib_groupe: group.groupe_parent.lib_groupe,
+            desc_groupe: group.groupe_parent.desc_groupe,
+            color: group.groupe_parent.color,
+          });
+          addedGroups[group.groupe_parent.lib_groupe] = true;
+        }
 
-      if (existingGroupIndex === -1) {
-        result.push({
-          lib_groupe: group.groupe_parent.lib_groupe,
-          desc_groupe: group.groupe_parent.desc_groupe,
-          color: group.groupe_parent.color,
+        allGroups.forEach((g) => {
+          if (!addedGroups[g.lib_groupe]) {
+            result.push({
+              lib_groupe: g.lib_groupe,
+              desc_groupe: g.desc_groupe,
+              color: g.color,
+            });
+            addedGroups[g.lib_groupe] = true;
+          }
         });
       }
-
-      allGroups.forEach((g) => {
-        const existingGroupIndex = result.findIndex(
-          (r) => r.lib_groupe === g.lib_groupe
-        );
-
-        if (existingGroupIndex === -1) {
-          result.push({
-            lib_groupe: g.lib_groupe,
-            desc_groupe: g.desc_groupe,
-            color: g.color,
-          });
-        }
-      });
     });
-
     return result;
   }
 
   useEffect(() => {
     setWaiting(true);
     fetchGroups().then((data) => {
+      console.log(data);
       const filterGroup = extractParentGroup(data);
       setGroups(filterGroup);
       setActiveGroups(filterGroup);
