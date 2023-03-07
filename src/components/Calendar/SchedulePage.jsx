@@ -9,7 +9,7 @@ function SchedulePage() {
     useCalendar();
 
   return (
-    <div1
+    <div
       style={{
         width: "100%",
         height: "100vh",
@@ -17,7 +17,6 @@ function SchedulePage() {
         flexDirection: "column",
       }}
     >
-      {/* <AdminButtons /> */}
       <div
         style={{
           display: "flex",
@@ -25,6 +24,7 @@ function SchedulePage() {
           alignItems: "center",
           flexGrow: "1",
           marginTop: "7vh",
+          minWidth: "1024px",
         }}
       >
         <Groups groups={groups} updateGroups={updateGroups} />
@@ -36,7 +36,7 @@ function SchedulePage() {
           waiting={waiting}
         />
       </div>
-    </div1>
+    </div>
   );
 }
 
