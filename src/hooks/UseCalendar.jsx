@@ -80,7 +80,7 @@ function useCalendar() {
       fetchEvents(
         `${month === 1 ? year - 1 : year}-${
           month === 1 ? "12" : month - 1 < 10 ? `0${month - 1}` : month - 1
-        } -22`,
+        }-22`,
         `${month === 12 ? year + 1 : year}-${
           month === 12 ? "01" : month + 1 < 10 ? `0${month + 1}` : month + 1
         }-06`,
